@@ -2,6 +2,7 @@
 ###DI analysis
 ###
 
+library(dplyr)
 
 hits <- read.csv("hits.csv")
 
@@ -14,4 +15,13 @@ hits$category <- as.factor(hits$category)
 
 ###Question 1
 ###Mean # of seconds between first & last page visits, when visits >1
+
+#specify user must > 1
+dupes <- duplicated(hits$user)
+hitsdup <- filter(hits, duplicated(user))
+seconds <- difftime(max(hits$time), min(hits$time), units = "secs")
+
+
+###Question 3
+###Average # page visits, when visits > 1
 
