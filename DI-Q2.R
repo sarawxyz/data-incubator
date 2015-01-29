@@ -24,8 +24,8 @@ secs_start <- ddply(hits, .(user), mutate, secs_from_start = time - min(time))
 
 #specify user must > 1
 #dupes <- duplicated(hits$user)
-hitsdup <- filter(hits, duplicated(user))
-seconds <- difftime(max(hits$time), min(hits$time), units = "secs")
+#hitsdup <- filter(hits, duplicated(user))
+#seconds <- difftime(max(hits$time), min(hits$time), units = "secs")
 
 
 ###Q2: average # seconds btwn consecutive page visits
@@ -36,15 +36,20 @@ ave_switch <- average(difftime)
 ###Q3: average # page visits  DONE
 user_mean <- round(mean(user_freq$Freq), 10)
 
+
 ###Q4: average # page visits, visits > 1  DONE
 multi <- subset(user_freq, Freq != 1)
 multi_mean <- round(mean(multi$Freq), 10)
 
+###Q5: average # categories visited per user  DONE
+num_cat <- with(hits, tapply(category, user, 
+                             FUN = function(category) length(unique(category))))
+ave_num_cat <- round(mean(num_cat), 10)
 
-###Q5: average # categories visited per user  THIS ONE HANGS
-num_cat <- with(hits, tapply(category, user, FUN = function(x) length(unique(x))))
+###Q6: average # categories visited per user,  visits > 1    DONE
+num_cat_multi <- subset(num_cat, num_cat > 1)
+ave_num_cat_multi <- round(mean(num_cat_multi), 10)
 
-###Q6: average # categories visited per user,  visits > 1
 
 ###Q7:  average # categories visited per user,  cat > 1
 
@@ -53,3 +58,4 @@ num_cat <- with(hits, tapply(category, user, FUN = function(x) length(unique(x))
 
 ###Q9. Highest probability of transition to different category. 
 ###Give a tuple 'Category1, Category2, probability'
+
