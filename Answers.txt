@@ -8,9 +8,9 @@ Q4: Average number of visits per user given they visited more than once = 6.9603
 
 Q5: Average number of categories visited per user = 1.7238859006
 
-Q6: Average number of categories visited per user given they visitied more than once = 2.8315283565
+Q6: Average number of categories visited per user given they visitied more than once = 2.1443054593
 
-Q7: Average number of categories visited per user given they visitied more than one category
+Q7: Average number of categories visited per user given they visitied more than one category = 2.8315283565
 
 Q8: Probability of immediately visiting a page of the same category (given that the user visits again) evenly averaged over all categories
 

@@ -46,15 +46,30 @@ num_cat <- with(hits, tapply(category, user,
                              FUN = function(category) length(unique(category))))
 ave_num_cat <- round(mean(num_cat), 10)
 
-###Q6: average # categories visited per user,  visits > 1    DONE
+
+
+
+###Q6: average # categories visited per user,  visits > 1    DONE CHECK LOGIC
+user_freq <- rename(user_freq, c("Var1"="user", "Freq" = "visits"))
+
+num_cat <- as.data.frame.table(num_cat)
+num_cat <- rename(num_cat, c("Var1"="user", "Freq" = "cats"))
+
+#num_cat_multi <- as.data.frame.table(num_cat_multi)
+#num_cat_multi <- rename(num_cat_multi, c("Var1"="user", "Freq" = "cats"))
+
+num_cats_multi_visits <- num_cat$user %in% multi$user
+cats_multi_visits <- num_cat[num_cats_multi_visits, ]
+ave_cats_multi_visits <- round(mean(cats_multi_visits$cats), 10)
+
+
+###Q7:  average # categories visited per user,  cat > 1   DONE
 num_cat_multi <- subset(num_cat, num_cat > 1)
 ave_num_cat_multi <- round(mean(num_cat_multi), 10)
 
 
-###Q7:  average # categories visited per user,  cat > 1
-
-
 ###Q8: Probability of immediately visiting page of same category, visits > 1
+same_cat <- aggregate (group_by?)
 
 ###Q9. Highest probability of transition to different category. 
 ###Give a tuple 'Category1, Category2, probability'
