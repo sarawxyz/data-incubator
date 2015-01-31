@@ -115,7 +115,7 @@ income <- ggplot(nbhd_trees, aes(x=forest_mass, y=MedianHouseholdIncome)) +
       xlab("\nForest Mass") +
       ylab("Median Household Income\n") +
       coord_cartesian(ylim = c(0, 125000)) +
-      ggtitle("Correlation between Income and Forest Mass by Neighbourhood\n\n") +
+      ggtitle("Correlation between Income and Forest Mass\n\n") +
       annotate("text", x = 2000, y = 90000, label = "r^2 = 0.53") +
       theme_minimal()
 
@@ -125,14 +125,14 @@ uirate <- ggplot(nbhd_trees, aes(x=forest_mass, y=UnemploymentRate)) +
       xlab("\nForest Mass") +
       ylab("Unemployment Rate\n") +
       coord_cartesian(ylim = c(0, 12.5)) +
-      ggtitle("Correlation between Unemployment Rate and Forest Mass by Neighbourhood\n\n") +
+      ggtitle("Correlation between Unemployment Rate and Forest Mass\n\n") +
       annotate("text", x = 6000, y = 9, label = "r^2 = -0.49") +
       theme_minimal()
 
-png(filename = "Income.png")
+png(filename = "Income2.png")
 income
 dev.off()
 
-png(filename = "UIRate.png")
+png(filename = "UIRate2.png")
 uirate
 dev.off()
