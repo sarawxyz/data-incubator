@@ -1,6 +1,6 @@
 Q1: Average number of seconds between first and last visit (among those who visited more than once) = 13.6206986321
 
-Q2: Average number of seconds between consecutive visits by a user
+Q2: Average number of seconds between consecutive visits by a user = 102.806979195
 
 Q3: Average number of visits per user = 4.7705139061  
 

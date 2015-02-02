@@ -2,7 +2,6 @@
 library(plyr)
 library(dplyr)
 library(ggplot2)
-library(lubridate)
 
 hits <- read.csv("hits.csv")
 #hits <- tbl_df(hits)
@@ -13,24 +12,30 @@ hits$category <- as.factor(hits$category)
 
 ###table of # visits per user
 user_freq <-as.data.frame(table(hits$user))
-qplot(Freq, data=user_freq)   ##note: exteme skewness
+qplot(Freq, data=user_freq)   ##note: EXTREME SKEWNESS
 
 
-###DONE BUT CHECK UNITS
+###DONE BUT CHECK UNITS?
 ###Q1: average # of seconds btwn 1st & last page visits, visits >1
+### note dplyr does not play nice with POSIX?
 ###
 ave_time <- with(hits, tapply(time, user, 
                              FUN = function(time) (max(time) - min(time))))
 row_sub = apply(ave_time, 1, function(row) all(row !=0 ))
 ave_time <- ave_time[row_sub]
 average_time <- round(mean(ave_time), 10)
+print(average_time, digits = 12)
 
-
-###
+###NOT WORKING?? ANSWER RETURNED CAN'T BE CORRECT BC > ANSWER FOR Q1
 ###Q2: average # seconds btwn consecutive page visits
 ###
-ave_switch <- with(hits, tapply(time, user, 
-                              FUN = function(time) mean())
+averag_consec <- with(hits, tapply(time, user, 
+                              FUN = function(time) mean(diff(time))))
+units(averag_consec) <- "secs"
+ave_consec <- round(mean(averag_consec, na.rm=TRUE), 10)
+print(ave_consec, digits = 13)
+
+averag_consec <- aggregate( time ~ user, data = hits, FUN = mean(diff(time)))
 
 ###DONE
 ###Q3: average # page visits  
@@ -67,15 +72,4 @@ ave_cats_multi_visits <- round(mean(cats_multi_visits$cats), 10)
 ###
 num_cat_multi <- subset(num_cat, num_cat > 1)
 ave_num_cat_multi <- round(mean(num_cat_multi), 10)
-
-
-###
-###Q8: Probability of immediately visiting page of same category, visits > 1
-###
-same_cat <- aggregate (group_by?)
-
-
-###
-###Q9. Highest probability of transition to different category. 
-###Give a tuple 'Category1, Category2, probability'
 
